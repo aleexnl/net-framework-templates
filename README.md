@@ -1,13 +1,17 @@
 # .NET Framework SDK Project Templates
-this repo contains the nuget package with the templates for .NET Framework using the new SDK .csproj style.
+
+This repo contains the nuget package with the templates for .NET Framework using the new SDK .csproj style.
 
 ## Why This?
+
 Microsoft is not giving the users this templates by default in Visual Studio, they are only available in .NET Core, even though this format is compatible with .NET Framework projects.
 
-## What's The Difference?
+## What Is The Difference?
+
 That's an easy answer my friend. watch this:
 
 > This is the old style .csproj (created from Visual Studio 2022 )
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -43,18 +47,18 @@ That's an easy answer my friend. watch this:
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System"/>
-    
+
     <Reference Include="System.Core"/>
     <Reference Include="System.Xml.Linq"/>
     <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
+
+
     <Reference Include="Microsoft.CSharp"/>
-    
+
     <Reference Include="System.Data"/>
-    
+
     <Reference Include="System.Net.Http"/>
-    
+
     <Reference Include="System.Xml"/>
   </ItemGroup>
   <ItemGroup>
@@ -64,8 +68,10 @@ That's an easy answer my friend. watch this:
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
  </Project>
 ```
+
 Pretty messy right? I definetly won't read that. Now check the new format friend...
-```xml 
+
+```xml
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net472</TargetFramework>
@@ -76,4 +82,5 @@ Pretty messy right? I definetly won't read that. Now check the new format friend
     </ItemGroup>
 </Project>
 ```
-I think you got the point mate. 
+
+I think you got the point mate.
