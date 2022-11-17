@@ -17,6 +17,12 @@
       "choices": [
         {
           "choice": "net472"
+        },
+        {
+          "choice": "net480"
+        },
+        {
+          "choice": "net481"
         }
       ],
       "defaultValue": "net472"
