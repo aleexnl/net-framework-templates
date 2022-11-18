@@ -14,34 +14,47 @@ variables:
   Minor: '0'
   Patch: '0'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Build Project'
-  inputs:
-    command: 'build'
-- task: NuGetCommand@2
-  displayName: 'NuGet Pack'
-  inputs:
-    command: 'pack'
-    packagesToPack: '*.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '$(Major)'
-    minorVersion: '$(Minor)'
-    patchVersion: '$(Patch)'
-- task: NuGetAuthenticate@1
-  displayName: 'NuGet Authenticate'
-- task: NuGetCommand@2
-  displayName: 'Publish in Feed'
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
-    allowPackageConflicts: true
-- task: NuGetCommand@2
-  displayName: 'Publish on nuget.org'
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'aleexnl nuget.org'
+stages: 
+  - stage : Pack NuGet Package
+    jobs:
+      - job: BuildProject
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: 'Build Project'
+            inputs:
+              command: 'build'
+          - task: NuGetCommand@2
+            displayName: 'NuGet Pack'
+            inputs:
+              command: 'pack'
+              packagesToPack: '*.csproj'
+              versioningScheme: 'byPrereleaseNumber'
+              majorVersion: '$(Major)'
+              minorVersion: '$(Minor)'
+              patchVersion: '$(Patch)'
+      - job :  PublishonFeed
+        dependsOn: BuildProject
+        steps:
+          - task: NuGetAuthenticate@1
+            displayName: 'NuGet Authenticate'
+          - task: NuGetCommand@2
+            displayName: 'Publish in Feed'
+            inputs:
+              command: 'push'
+              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+              nuGetFeedType: 'internal'
+              publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
+              allowPackageConflicts: true
+      - job :  PublishOnNugetOrg
+        steps:
+          - task: NuGetAuthenticate@1
+            inputs:
+              nuGetServiceConnections: 'aleexnl nuget.org'
+          - task: NuGetCommand@2
+            displayName: 'Publish on nuget.org'
+            inputs:
+              command: 'push'
+              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+              nuGetFeedType: 'external'
+              publishFeedCredentials: 'aleexnl nuget.org'
+
