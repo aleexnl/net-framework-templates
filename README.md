@@ -1,3 +1,5 @@
+[![.NET](https://github.com/aleexnl/net-framework-templates/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/aleexnl/net-framework-templates/actions/workflows/dotnet.yml)
+
 # .NET Framework SDK Project Templates
 
 NET Framework SDK Project Templates is a template package that allows programmers to create .NET Framework projects using [new SDK format](https://www.hanselman.com/blog/upgrading-an-existing-net-project-files-to-the-lean-new-csproj-format-from-net-core).
