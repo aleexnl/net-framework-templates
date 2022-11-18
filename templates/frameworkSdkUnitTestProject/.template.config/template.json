@@ -3,7 +3,7 @@
   "author": "aleexnl",
   "name": "NET Framework Unit Test Project (SDK Format)",
   "description": ".NET Framework Class Library project using new SDK format.",
-  "identity": "Aleexnl.Templates.Net.Framework.Sdk.UnitTestProject",
+  "identity": "Templates.Net.Framework.Sdk.UnitTestProject",
   "shortName": "netFrameworkSdkUnitTestProject",
   "tags": {
     "language": "C#",
