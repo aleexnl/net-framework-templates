@@ -13,7 +13,7 @@
     <PackageDescription>.NET Framework project templates using SDK style</PackageDescription>
      
 
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net48,net472,net471,net47,net11,net20,net35,net40,net403,net45,net451,net452,net46,net461,net462</TargetFrameworks>
     <langVersion>latest</langVersion>
 
     <IncludeContentInPack>true</IncludeContentInPack>
