@@ -11,8 +11,8 @@
     <PackageDescription>.NET Framework project templates using SDK style</PackageDescription>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/aleexnl/net-framework-templates</RepositoryUrl>
+    <PackageProjectUrl>git</PackageProjectUrl>
     <PackageProjectUrl>https://github.com/aleexnl/net-framework-templates</PackageProjectUrl>
-     
 
     <TargetFramework>net6.0</TargetFramework>
     <langVersion>latest</langVersion>
@@ -27,7 +27,8 @@
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
-    <None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Include="README.md" Pack="true" PackagePath=""/>
+    <None Include="LICENSE.txt" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>
