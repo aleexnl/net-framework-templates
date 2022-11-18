@@ -64,7 +64,8 @@ stages:
         steps:
           - task: NuGetAuthenticate@1
             inputs:
-              nuGetServiceConnections: 'aleexnl nuget.org'
+              nuGetServiceConnections: 'aleexnlNugetOrg'
+              forceReinstallCredentialProvider: true
       - job: Push
         dependsOn: Authenticate
         steps:
@@ -75,4 +76,3 @@ stages:
               packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
               nuGetFeedType: 'external'
               publishFeedCredentials: 'aleexnl nuget.org'
-
