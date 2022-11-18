@@ -21,11 +21,12 @@ steps:
       minorVersion: '0'
       patchVersion: '0'
   - task: DotNetCoreCLI@2
+    displayName: Push to Feed
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
       nuGetFeedType: 'internal'
-      publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
+      publishVstsFeed: 'bbb6dbfb-a03d-4eea-92dd-f7174e28638e/514d41be-a375-44cc-8c3e-e3460848e3c0'
   - task: DotNetCoreCLI@2
     displayName: Push to nuget.org
     inputs:
