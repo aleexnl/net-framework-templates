@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "aleexnl",
+  "name": "NET Framework Unit Test Project (SDK Format)",
+  "description": ".NET Framework Class Library project using new SDK format.",
+  "identity": "Aleexnl.Templates.Net.Framework.Sdk.UnitTestProject",
+  "shortName": "netFrameworkSdkUnitTestProject",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net472"
+        },
+        {
+          "choice": "net480"
+        },
+        {
+          "choice": "net481"
+        }
+      ],
+      "defaultValue": "net472",
+      "replaces": "$frameworkVersion"
+    },
+    "LangVersion": {
+      "type": "parameter",
+      "description": "C# Version",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "preview"
+        },
+        {
+          "choice": "latest"
+        },
+        {
+          "choice": "latestMajor"
+        },
+        {
+          "choice": "11.0"
+        },
+        {
+          "choice": "10.0"
+        },
+        {
+          "choice": "9.0"
+        },
+        {
+          "choice": "8.0"
+        },
+        {
+          "choice": "7.3"
+        },
+        {
+          "choice": "7.2"
+        },
+        {
+          "choice": "7.1"
+        },
+        {
+          "choice": "7.0"
+        },
+        {
+          "choice": "6.0"
+        },
+        {
+          "choice": "5.0"
+        },
+        {
+          "choice": "4.0"
+        },
+        {
+          "choice": "3.0"
+        },
+        {
+          "choice": "2"
+        },
+        {
+          "choice": "1"
+        }
+      ],
+      "defaultValue": "latestMajor",
+      "replaces": "$langVersion"
+    },
+    "MockLibrary": {
+      "type": "parameter",
+      "description": "Mocking Library",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Moq"
+        }
+      ],
+      "defaultValue": ""
+    },
+    "UseMoq": {
+      "type": "computed",
+      "value": "(MockLibrary == \"Moq\")"
+    }
+  }
+}
