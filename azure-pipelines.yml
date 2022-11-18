@@ -23,6 +23,13 @@ stages:
             displayName: 'Build Project'
             inputs:
               command: 'build'
+      - job: PackProject
+        dependsOn: BuildProject
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: 'Build Project'
+            inputs:
+              command: 'build'
           - task: NuGetCommand@2
             displayName: 'NuGet Pack'
             inputs:
@@ -35,12 +42,15 @@ stages:
   - stage: PublishOnFeed
     dependsOn: PackNuGetPackage
     jobs:
-      - job :  PublishOnFeed
+      - job :  Authenticate
         steps:
           - task: NuGetAuthenticate@1
             displayName: 'NuGet Authenticate'
+      - job :  Push
+        dependsOn: Authenticate
+        steps:
           - task: NuGetCommand@2
-            displayName: 'Publish in Feed'
+            displayName: 'Push to Feed'
             inputs:
               command: 'push'
               packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
@@ -50,13 +60,16 @@ stages:
   - stage: PublishOnNugetOrg
     dependsOn: PackNuGetPackage
     jobs:
-      - job :  PublishOnNugetOrg
+      - job :  Authenticate
         steps:
           - task: NuGetAuthenticate@1
             inputs:
               nuGetServiceConnections: 'aleexnl nuget.org'
+      - job: Push
+        dependsOn: Authenticate
+        steps:
           - task: NuGetCommand@2
-            displayName: 'Publish on nuget.org'
+            displayName: 'Push to nuget.org'
             inputs:
               command: 'push'
               packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
