@@ -25,7 +25,8 @@
           "choice": "net481"
         }
       ],
-      "defaultValue": "net472"
+      "defaultValue": "net472",
+      "replaces": "net472"
     }
   }
 }
