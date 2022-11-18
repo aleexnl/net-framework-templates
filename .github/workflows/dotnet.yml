@@ -22,10 +22,13 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Pack
-        run: dotnet pack
+        run: dotnet pack --output . -c Release
 
       - name: Authenticate in github.com
         run: dotnet nuget add source --username aleexnl --password ${{ secrets.PUBLISH_PACKAGE_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/aleexnl/index.json"
 
       - name: Push to github.com
-        run: dotnet nuget push "**/*.nupkg"  --api-key ${{ secrets.PUBLISH_PACKAGE_TOKEN }} --source "github"
+        run: dotnet nuget push "*.nupkg"  --api-key ${{ secrets.PUBLISH_PACKAGE_TOKEN }} --source "github"
+        
+      - name: Push to nuget.org
+        run: dotnet nuget push "*.nupkg"  --api-key ${{ secrets.NUGETORG_TOKEN }} --source "https://api.nuget.org/v3/index.json"
