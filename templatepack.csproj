@@ -1,19 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Title>.NET Framework SDK Projects</Title>
     <PackageType>Template</PackageType>
     <PackageVersion>1.1.0</PackageVersion>
     <PackageId>Aleexnl.Templates.Net.Framework.Sdk</PackageId>
-    <Title>.NET Framework SDK Projects</Title>
     <Authors>aleexnl</Authors>
     <Description>.NET Framework project templates using SDK style</Description>
     <PackageTags>dotnet-new;templates;contoso</PackageTags>
-
-    <RepositoryUrl>https://github.com/aleexnl/net-framework-templates</RepositoryUrl>
     <PackageDescription>.NET Framework project templates using SDK style</PackageDescription>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/aleexnl/net-framework-templates</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/aleexnl/net-framework-templates</PackageProjectUrl>
      
 
-    <TargetFrameworks>net48,net472,net471,net47,net11,net20,net35,net40,net403,net45,net451,net452,net46,net461,net462</TargetFrameworks>
+    <TargetFrameworks>net480,net472,net471,net47,net11,net20,net35,net40,net403,net45,net451,net452,net46,net461,net462</TargetFrameworks>
     <langVersion>latest</langVersion>
 
     <IncludeContentInPack>true</IncludeContentInPack>
@@ -26,6 +27,7 @@
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
+    <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
