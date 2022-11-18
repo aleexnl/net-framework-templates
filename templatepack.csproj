@@ -10,6 +10,7 @@
     <PackageTags>dotnet-new;templates;contoso</PackageTags>
     <PackageDescription>.NET Framework project templates using SDK style</PackageDescription>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RepositoryUrl>https://github.com/aleexnl/net-framework-templates</RepositoryUrl>
     <PackageProjectUrl>git</PackageProjectUrl>
     <PackageProjectUrl>https://github.com/aleexnl/net-framework-templates</PackageProjectUrl>
@@ -28,7 +29,7 @@
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
     <None Include="README.md" Pack="true" PackagePath="/"/>
-    <None Include="LICENSE" Pack="true" PackagePath="/"/>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="/"/>
   </ItemGroup>
 
 </Project>
