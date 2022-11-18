@@ -14,7 +14,7 @@
     <PackageProjectUrl>https://github.com/aleexnl/net-framework-templates</PackageProjectUrl>
      
 
-    <TargetFrameworks>net480,net472,net471,net47,net11,net20,net35,net40,net403,net45,net451,net452,net46,net461,net462</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <langVersion>latest</langVersion>
 
     <IncludeContentInPack>true</IncludeContentInPack>
