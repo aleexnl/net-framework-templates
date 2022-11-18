@@ -33,9 +33,9 @@ stages:
               minorVersion: '$(Minor)'
               patchVersion: '$(Patch)'
   - stage: PublishOnFeed
+    dependsOn: PackNuGetPackage
     jobs:
       - job :  PublishOnFeed
-        dependsOn: BuildProject
         steps:
           - task: NuGetAuthenticate@1
             displayName: 'NuGet Authenticate'
@@ -48,6 +48,7 @@ stages:
               publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
               allowPackageConflicts: true
   - stage: PublishOnNugetOrg
+    dependsOn: PackNuGetPackage
     jobs:
       - job :  PublishOnNugetOrg
         steps:
