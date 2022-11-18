@@ -8,17 +8,25 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+
+variables:
+  Major: '1'
+  Minor: '0'
+  Patch: '0'
+
 steps:
 - task: NuGetCommand@2
-  name: 'Pack'
+  displayName: :'NuGet Pack'
   inputs:
     command: 'pack'
     packagesToPack: '*.csproj'
-    versioningScheme: 'off'
+    versioningScheme: 'byPrereleaseNumber'
+- task: NuGetAuthenticate@1
+  displayName: 'NuGet Authenticate'
 - task: NuGetCommand@2
-  name: 'Publish'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'bbb6dbfb-a03d-4eea-92dd-f7174e28638e/9a041236-a32d-4a0e-9a47-bddaf0161393'
+    allowPackageConflicts: true
