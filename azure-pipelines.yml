@@ -26,10 +26,6 @@ stages:
       - job: PackProject
         dependsOn: BuildProject
         steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'Build Project'
-            inputs:
-              command: 'build'
           - task: NuGetCommand@2
             displayName: 'NuGet Pack'
             inputs:
