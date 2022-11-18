@@ -3,7 +3,7 @@
   "author": "aleexnl",
   "name": "NET Framework Class Library (SDK Format)",
   "description": ".NET Framework Class Library project using new SDK format.",
-  "identity": "Aleexnl.Templates.Net.Framework.Sdk.ClassLibrary",
+  "identity": "Templates.Net.Framework.Sdk.ClassLibrary",
   "shortName": "netFrameworkSdkClassLibrary",
   "tags": {
     "language": "C#",
