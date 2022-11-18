@@ -27,10 +27,10 @@ steps:
       packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
       nuGetFeedType: 'internal'
       publishVstsFeed: 'bbb6dbfb-a03d-4eea-92dd-f7174e28638e/514d41be-a375-44cc-8c3e-e3460848e3c0'
-  - task: DotNetCoreCLI@2
+  - task: NuGetCommand@2
     displayName: Push to nuget.org
     inputs:
       command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
       nuGetFeedType: 'external'
       publishFeedCredentials: 'aleexnlNugetOrg'
