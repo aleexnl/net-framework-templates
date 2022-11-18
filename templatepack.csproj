@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>.NET Framework SDK Projects</Title>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.1.2</PackageVersion>
+    <PackageVersion>1.1.3</PackageVersion>
     <PackageId>Templates.Net.Framework.Sdk</PackageId>
     <Authors>aleexnl</Authors>
     <Description>.NET Framework project templates using SDK style</Description>
