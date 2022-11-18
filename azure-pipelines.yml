@@ -15,19 +15,17 @@ steps:
     inputs:
       command: 'pack'
       packagesToPack: '*.csproj'
-      includesymbols: true
+      includesymbols: false
       versioningScheme: 'byPrereleaseNumber'
       majorVersion: '1'
       minorVersion: '0'
       patchVersion: '0'
   - task: DotNetCoreCLI@2
-    displayName: Push to Feed
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
       nuGetFeedType: 'internal'
-      publishVstsFeed: "a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b"
-  
+      publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
   - task: DotNetCoreCLI@2
     displayName: Push to nuget.org
     inputs:
