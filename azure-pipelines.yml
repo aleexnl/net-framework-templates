@@ -26,15 +26,13 @@ stages:
       - job: PackProject
         dependsOn: BuildProject
         steps:
-          - task: NuGetCommand@2
-            displayName: 'NuGet Pack'
+          - task: DotNetCoreCLI@2
+            displayName: 'Pack NuGetPackage'
             inputs:
               command: 'pack'
               packagesToPack: '*.csproj'
-              versioningScheme: 'byPrereleaseNumber'
-              majorVersion: '$(Major)'
-              minorVersion: '$(Minor)'
-              patchVersion: '$(Patch)'
+              outputDir: '$(Build.ArtifactStagingDirectory)/PackedNuGets'
+              includesymbols: true
   - stage: PublishOnFeed
     dependsOn: PackNuGetPackage
     jobs:
@@ -45,14 +43,13 @@ stages:
       - job :  Push
         dependsOn: Authenticate
         steps:
-          - task: NuGetCommand@2
+          - task: DotNetCoreCLI@2
             displayName: 'Push to Feed'
             inputs:
               command: 'push'
               packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
               nuGetFeedType: 'internal'
               publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
-              allowPackageConflicts: true
   - stage: PublishOnNugetOrg
     dependsOn: PackNuGetPackage
     jobs:
