@@ -31,7 +31,6 @@ steps:
 - task: NuGetAuthenticate@1
   displayName: 'NuGet Authenticate'
 - task: NuGetCommand@2
-  displayName: 'Push to Feed'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
