@@ -15,7 +15,7 @@ variables:
   Patch: '0'
 
 stages: 
-  - stage : Pack NuGet Package
+  - stage : PackNuGetPackage
     jobs:
       - job: BuildProject
         steps:
@@ -32,7 +32,9 @@ stages:
               majorVersion: '$(Major)'
               minorVersion: '$(Minor)'
               patchVersion: '$(Patch)'
-      - job :  PublishonFeed
+  - stage: PublishOnFeed
+    jobs:
+      - job :  PublishOnFeed
         dependsOn: BuildProject
         steps:
           - task: NuGetAuthenticate@1
@@ -45,6 +47,8 @@ stages:
               nuGetFeedType: 'internal'
               publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
               allowPackageConflicts: true
+  - stage: PublishOnNugetOrg
+    jobs:
       - job :  PublishOnNugetOrg
         steps:
           - task: NuGetAuthenticate@1
