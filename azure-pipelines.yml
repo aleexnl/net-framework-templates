@@ -15,8 +15,12 @@ variables:
   Patch: '0'
 
 steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build Project'
+  inputs:
+    command: 'build'
 - task: NuGetCommand@2
-  displayName: :'NuGet Pack'
+  displayName: 'NuGet Pack'
   inputs:
     command: 'pack'
     packagesToPack: '*.csproj'
@@ -27,6 +31,7 @@ steps:
 - task: NuGetAuthenticate@1
   displayName: 'NuGet Authenticate'
 - task: NuGetCommand@2
+  displayName: 'Push to Feed'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
