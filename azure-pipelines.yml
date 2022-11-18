@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
@@ -14,63 +9,24 @@ variables:
   Minor: '0'
   Patch: '0'
 
-stages: 
-  - stage : PackNuGetPackage
-    jobs:
-      - job: BuildProject
-        steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'Build Project'
-            inputs:
-              command: 'build'
-      - job: PackProject
-        dependsOn: BuildProject
-        steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'Pack NuGetPackage'
-            inputs:
-              command: 'pack'
-              packagesToPack: '*.csproj'
-              outputDir: '$(Build.ArtifactStagingDirectory)/PackedNuGets'
-              includesymbols: false
-          - script: echo $(Build.ArtifactStagingDirectory)
-          - script: ls $(Build.ArtifactStagingDirectory)
-  - stage: PublishOnFeed
-    dependsOn: PackNuGetPackage
-    jobs:
-      - job :  Authenticate
-        steps:
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-      - job :  Push
-        dependsOn: Authenticate
-        steps:
-          - script: echo $(Build.ArtifactStagingDirectory)
-          - script: ls $(Build.ArtifactStagingDirectory)
-          - task: DotNetCoreCLI@2
-            displayName: 'Push to Feed'
-            inputs:
-              command: 'push'
-              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-              nuGetFeedType: 'internal'
-              publishVstsFeed: 'a1bc0bdf-5f73-4d81-93af-f2ca6a57ea3b'
-  - stage: PublishOnNugetOrg
-    dependsOn: PackNuGetPackage
-    jobs:
-      - job :  Authenticate
-        steps:
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: 'aleexnlNugetOrg'
-              forceReinstallCredentialProvider: true
-      - job: Push
-        dependsOn: Authenticate
-        steps:
-          - task: NuGetCommand@2
-            displayName: 'Push to nuget.org'
-            inputs:
-              command: 'push'
-              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-              nuGetFeedType: 'external'
-              publishFeedCredentials: 'aleexnlNugetOrg'
+steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'pack'
+      packagesToPack: '*.csproj'
+      includesymbols: true
+      versioningScheme: 'byPrereleaseNumber'
+      majorVersion: '1'
+      minorVersion: '0'
+      patchVersion: '0'
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'internal'
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'aleexnlNugetOrg'
