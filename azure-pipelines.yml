@@ -32,7 +32,8 @@ stages:
               command: 'pack'
               packagesToPack: '*.csproj'
               outputDir: '$(Build.ArtifactStagingDirectory)/PackedNuGets'
-              includesymbols: true
+              includesymbols: false
+          - script: tree '$(Build.ArtifactStagingDirectory)
   - stage: PublishOnFeed
     dependsOn: PackNuGetPackage
     jobs:
@@ -43,6 +44,7 @@ stages:
       - job :  Push
         dependsOn: Authenticate
         steps:
+          - script: tree '$(Build.ArtifactStagingDirectory)
           - task: DotNetCoreCLI@2
             displayName: 'Push to Feed'
             inputs:
