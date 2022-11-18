@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.0</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <PackageId>Aleexnl.Templates.Net.Framework.Sdk</PackageId>
     <Title>.NET Framework SDK Projects</Title>
     <Authors>aleexnl</Authors>
